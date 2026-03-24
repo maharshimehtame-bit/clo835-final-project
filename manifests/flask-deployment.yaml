@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: final
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-app
+          image: 691754694477.dkr.ecr.us-east-1.amazonaws.com/clo835-final-app:latest
+          ports:
+            - containerPort: 81
+          env:
+            - name: APP_HEADER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: APP_HEADER_NAME
+            - name: APP_COLOR
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: APP_COLOR
+            - name: BG_IMAGE_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: BG_IMAGE_BUCKET
+            - name: BG_IMAGE_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: BG_IMAGE_KEY
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DBHOST
+            - name: DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DATABASE
+            - name: DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: DBUSER
+            - name: DBPWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: DBPWD

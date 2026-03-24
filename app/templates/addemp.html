@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Database</title>
+    <style>
+        body {
+            {% if bg_path %}
+            background-image: url('{{ bg_path }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            {% else %}
+            background-color: {{ color }};
+            {% endif %}
+            font-family: Arial, sans-serif;
+        }
+
+        .form-box {
+            width: 500px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.88);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 16px 0;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h1>{{ app_header_name }}</h1>
+        <h2>Employee Database</h2>
+
+        <form action="/addemp" method="POST">
+            <label>Employee ID:</label>
+            <input type="text" name="emp_id" required>
+
+            <label>First Name:</label>
+            <input type="text" name="first_name" required>
+
+            <label>Last Name:</label>
+            <input type="text" name="last_name" required>
+
+            <label>Primary Skills:</label>
+            <input type="text" name="primary_skill" required>
+
+            <label>Location:</label>
+            <input type="text" name="location" required>
+
+            <input type="submit" value="UPDATE DATABASE">
+        </form>
+
+        <div class="links">
+            <a href="/getemp">GET EMPLOYEE INFORMATION</a>
+        </div>
+    </div>
+</body>
+</html>

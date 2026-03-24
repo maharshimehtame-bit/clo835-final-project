@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: final
+data:
+  APP_HEADER_NAME: "Maharshi Mehta"
+  APP_COLOR: "lime"
+  BG_IMAGE_BUCKET: "clo835-final-bg-1774370230"
+  BG_IMAGE_KEY: "background.jpg"
+  DBHOST: "mysql-service"
+  DATABASE: "employees"

@@ -1,0 +1,21 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: clo835-final-cluster
+  region: us-east-1
+
+availabilityZones: ["us-east-1a","us-east-1b"]
+
+iam:
+  serviceRoleARN: arn:aws:iam::691754694477:role/c193466a4972421l13418769t1w691754-LabEksClusterRole-kUUGv31uej1V
+
+managedNodeGroups:
+  - name: nodegroup
+    instanceType: t3.small
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 3
+
+    iam:
+      instanceRoleARN: arn:aws:iam::691754694477:role/c193466a4972421l13418769t1w691754694-LabEksNodeRole-IWtDMpjumtbE
