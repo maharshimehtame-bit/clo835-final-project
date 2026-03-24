@@ -1,41 +1,121 @@
-# Install the required MySQL package
+# CLO835 Final Project – Kubernetes Application Deployment on AWS
 
-sudo apt-get update -y
-sudo apt-get install mysql-client -y
+## 📌 Project Overview
+This project demonstrates the deployment of a containerized Flask web application on **Amazon EKS (Elastic Kubernetes Service)**. The application integrates with **MySQL for data storage** and **Amazon S3 for dynamic background images**, showcasing a complete cloud-native architecture using AWS services and Kubernetes.
 
-# Running application locally
-pip3 install -r requirements.txt
-sudo python3 app.py
-# Building and running 2 tier web application locally
-### Building mysql docker image 
-```docker build -t my_db -f Dockerfile_mysql . ```
+---
 
-### Building application docker image 
-```docker build -t my_app -f Dockerfile . ```
+## 👨‍💻 Group Members
+- Maharshi Mehta – maharshimehta.me@gmail.com  
+- Ghufran Ataie – ghufranataie@hotmail.com  
+- Vibha Thakkar – thakkarvibha20@gmail.com  
 
-### Running mysql
-```docker run -d -e MYSQL_ROOT_PASSWORD=pw  my_db```
+---
+
+## 🏗️ Architecture
+The application uses the following components:
+
+- Amazon EKS – Kubernetes cluster for orchestration  
+- Docker – Containerized Flask application  
+- Amazon ECR – Container image storage  
+- MySQL (Kubernetes Deployment) – Backend database  
+- Persistent Volume (EBS) – Data persistence  
+- Amazon S3 – Dynamic background image storage  
+- ConfigMap & Secret – Configuration and credentials  
+- LoadBalancer Service – Public access to the app  
+
+---
+
+## 📁 Repository Structure
 
 
-### Get the IP of the database and export it as DBHOST variable
-```docker inspect <container_id>```
+final-project/
+├── app/
+│ ├── app.py
+│ ├── Dockerfile
+│ ├── requirements.txt
+│ ├── templates/
+│ └── .github/workflows/
+│
+├── manifests/
+│ ├── configmap.yaml
+│ ├── secret.yaml
+│ ├── pvc.yaml
+│ ├── mysql-deployment.yaml
+│ ├── mysql-service.yaml
+│ ├── flask-deployment.yaml
+│ ├── flask-service.yaml
 
 
-### Example when running DB runs as a docker container and app is running locally
-```
-export DBHOST=127.0.0.1
-export DBPORT=3307
-```
-### Example when running DB runs as a docker container and app is running locally
-```
-export DBHOST=172.17.0.2
-export DBPORT=3306
-```
-```
-export DBUSER=root
-export DATABASE=employees
-export DBPWD=pw
-export APP_COLOR=blue
-```
-### Run the application, make sure it is visible in the browser
-```docker run -p 8080:8080  -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD  my_app```
+---
+
+## 🚀 Features
+- Add employee records  
+- Retrieve employee information  
+- Persistent storage using Kubernetes PVC (EBS)  
+- Dynamic background image loading from S3  
+- Containerized deployment using Docker and Kubernetes  
+
+---
+
+## ⚙️ Deployment Steps (Summary)
+
+### Build Docker Image
+```bash
+docker build -t clo835-final-app .
+
+
+Push to Amazon ECR
+
+docker tag clo835-final-app:latest <ECR_REPO_URI>
+docker push <ECR_REPO_URI>
+
+Deploy to Kubernetes
+kubectl apply -f manifests/
+
+
+
+
+Verify Deployment
+kubectl get pods -n final
+kubectl get svc -n final
+🧪 Testing
+Application Functionality
+Add employee
+Retrieve employee
+Persistence Test
+Delete MySQL pod
+Verify data remains intact
+S3 Integration
+Update background image in S3
+Modify ConfigMap
+Restart Flask deployment
+Verify updated UI
+🛠️ Challenges Faced
+EBS volume provisioning issue (resolved using EBS CSI driver)
+MySQL CrashLoopBackOff issue (resolved using fresh PVC and subPath)
+ConfigMap updates not reflecting immediately (resolved via pod restart)
+📜 Logs Verification
+
+The application logs confirm successful S3 integration:
+
+Background image location: s3://<bucket-name>/<image>
+📊 AWS Services Used
+Amazon EKS
+Amazon EC2
+Amazon ECR
+Amazon S3
+Amazon EBS
+IAM
+📌 Conclusion
+
+This project demonstrates a complete cloud-native deployment using Kubernetes and AWS. It highlights container orchestration, persistent storage, and dynamic configuration in a scalable environment.
+
+
+---
+
+## ✅ Now run:
+
+```bash
+
+
