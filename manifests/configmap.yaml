@@ -4,9 +4,9 @@ metadata:
   name: app-config
   namespace: final
 data:
-  APP_HEADER_NAME: "Maharshi Mehta"
+  APP_HEADER_NAME: "Group 4"
   APP_COLOR: "lime"
-  BG_IMAGE_BUCKET: "clo835-final-bg-1774370230"
+  BG_IMAGE_BUCKET: "clo835-final-bg-1774888544"
   BG_IMAGE_KEY: "background.jpg"
   DBHOST: "mysql-service"
   DATABASE: "employees"
