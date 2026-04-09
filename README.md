@@ -15,7 +15,11 @@ This project demonstrates the deployment of a containerized Flask web applicatio
 ## 🏗️ Architecture
 The application uses the following components:
 
-- Amazon EKS – Kubernetes cluster for orchestration  
+- Amazon EKS – 
+
+The application integrates:
+- **MySQL** for persistent data storage  
+- **Amazon S3** for dynamic background images Kubernetes cluster for orchestration  
 - Docker – Containerized Flask application  
 - Amazon ECR – Container image storage  
 - MySQL (Kubernetes Deployment) – Backend database  
@@ -72,6 +76,13 @@ docker push <ECR_REPO_URI>
 
 Deploy to Kubernetes
 kubectl apply -f manifests/
+
+🚀 CI/CD Pipeline
+GitHub Actions automatically:
+Builds Docker image
+Pushes to Amazon ECR
+Triggers deployment workflow
+
 
 
 
